@@ -1,0 +1,292 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 13.3
+-- Dumped by pg_dump version 13.3
+
+-- Started on 2021-08-01 23:37:35
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 202 (class 1259 OID 16434)
+-- Name: assets; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.assets (
+    asset_id character varying(255) NOT NULL,
+    brand character varying(255) NOT NULL,
+    model character varying(255) NOT NULL,
+    assettype character varying(255) NOT NULL,
+    imgurl character varying
+);
+
+
+ALTER TABLE public.assets OWNER TO postgres;
+
+--
+-- TOC entry 204 (class 1259 OID 16450)
+-- Name: developer_asset; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.developer_asset (
+    developer_id character varying(255) NOT NULL,
+    asset_id character varying(255) NOT NULL,
+    from_date timestamp without time zone NOT NULL,
+    to_date timestamp without time zone
+);
+
+
+ALTER TABLE public.developer_asset OWNER TO postgres;
+
+--
+-- TOC entry 205 (class 1259 OID 16468)
+-- Name: developer_license; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.developer_license (
+    developer_id character varying(255) NOT NULL,
+    license_id character varying(255) NOT NULL,
+    from_date timestamp without time zone NOT NULL,
+    to_date timestamp without time zone
+);
+
+
+ALTER TABLE public.developer_license OWNER TO postgres;
+
+--
+-- TOC entry 201 (class 1259 OID 16426)
+-- Name: developers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.developers (
+    developer_id character varying(255) NOT NULL,
+    lastname character varying(255) NOT NULL,
+    firstname character varying(255) NOT NULL,
+    phone character varying,
+    address character varying(255) NOT NULL,
+    city character varying(255) NOT NULL,
+    state character varying(255) NOT NULL,
+    country character varying(255) NOT NULL,
+    active boolean
+);
+
+
+ALTER TABLE public.developers OWNER TO postgres;
+
+--
+-- TOC entry 203 (class 1259 OID 16442)
+-- Name: licenses; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.licenses (
+    license_id character varying(255) NOT NULL,
+    software character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.licenses OWNER TO postgres;
+
+--
+-- TOC entry 200 (class 1259 OID 16418)
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    user_id character varying(255) NOT NULL,
+    username character varying(255) NOT NULL,
+    userpassword character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 3022 (class 0 OID 16434)
+-- Dependencies: 202
+-- Data for Name: assets; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.assets (asset_id, brand, model, assettype, imgurl) FROM stdin;
+aat1	Apple	Macbook Pro 2020 I5 10gen 16gb 512gb ssd	laptop	https://icdn.dtcn.com/image/digitaltrends_es/apple-macbook-pro-16-ry-14-500x500.jpg
+aat6	Samsung	V27F350 27inch 60hz Full HD	Monitor	https://mallweb.com.ar/media/catalog/product/cache/1/image/800x/9df78eab33525d08d6e5fb8d27136e95/g/i/gimage_15436.jpg
+aat5	Logitech	G403 Laser	mouse	https://lh3.googleusercontent.com/proxy/ES6JTaLkFNVnF2nSLnjcLMnVigmlHwPSrLPNaNaLoU-ChIE5GxBi8PVQMo7WbIX8suuGsgA1hfNbaUZ3j3u7dYidt21BKRDGzrBbVB6dln0s1Sw52byQ3xTdY7CY5M_sSXrQ52g_tcTPaWcy9Q
+aat4	Logitech	QWERTY Mechanical 80%	keyboard	https://www.arrichetta.com.ar/wp-content/uploads/2020/03/teclado-gamer-mecanico-logitech-g413-backlit-alambrico-usb-D_NQ_NP_642813-MLM27995485796_082018-F.jpg
+aat3	Dell	XPS I5 10gen 16gb 512ssd	laptop	https://www.notebookcheck.org/fileadmin/Notebooks/Dell/XPS_13_9370_FHD_i5/xps13_9370_4_3.jpg
+aat2	Lenovo	Ideapad I7 9gen 16gb 1tb ssd	laptop	https://static.lenovo.com/na/products/ideapad/1060x596/lenovo-ideapad-s340-15-intel-blacklit-noglass-gallery-01.jpg
+aat7	Apple	iPhone 8 Pro	Mobile device	https://i.blogs.es/1d891d/analisis-iphone-8-plus-red-applesfera-30/450_1000.jpg
+\.
+
+
+--
+-- TOC entry 3024 (class 0 OID 16450)
+-- Dependencies: 204
+-- Data for Name: developer_asset; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.developer_asset (developer_id, asset_id, from_date, to_date) FROM stdin;
+DEV-01	aat1	2021-07-28 01:09:23.90962	\N
+DEV-02	aat5	2021-08-01 21:02:17.430375	\N
+DEV-01	aat2	2021-07-28 01:09:49.362173	2021-08-01 00:00:00
+DEV-01	aat6	2021-08-01 22:05:15.667359	\N
+\.
+
+
+--
+-- TOC entry 3025 (class 0 OID 16468)
+-- Dependencies: 205
+-- Data for Name: developer_license; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.developer_license (developer_id, license_id, from_date, to_date) FROM stdin;
+DEV-01	lnc1	2021-07-28 01:12:40.230657	\N
+DEV-01	lnc2	2021-07-28 01:12:40.230657	\N
+\.
+
+
+--
+-- TOC entry 3021 (class 0 OID 16426)
+-- Dependencies: 201
+-- Data for Name: developers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.developers (developer_id, lastname, firstname, phone, address, city, state, country, active) FROM stdin;
+DEV-02	Dev	Otro	123123123123	afadfadgadg	adgadg	adgadg	adgadgadg	t
+DEV-01	Ferrer	Juani	123123	Obispo Gelabert 2845	Santa Fe	Santa Fe	Argentina	t
+\.
+
+
+--
+-- TOC entry 3023 (class 0 OID 16442)
+-- Dependencies: 203
+-- Data for Name: licenses; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.licenses (license_id, software) FROM stdin;
+lnc1	jira
+lnc2	slack
+lnc3	webmail
+\.
+
+
+--
+-- TOC entry 3020 (class 0 OID 16418)
+-- Dependencies: 200
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (user_id, username, userpassword) FROM stdin;
+USER01	Juani	03424950
+\.
+
+
+--
+-- TOC entry 2879 (class 2606 OID 16441)
+-- Name: assets assets_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.assets
+    ADD CONSTRAINT assets_pkey PRIMARY KEY (asset_id);
+
+
+--
+-- TOC entry 2883 (class 2606 OID 16457)
+-- Name: developer_asset developer_asset_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developer_asset
+    ADD CONSTRAINT developer_asset_pkey PRIMARY KEY (developer_id, asset_id);
+
+
+--
+-- TOC entry 2885 (class 2606 OID 16475)
+-- Name: developer_license developer_license_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developer_license
+    ADD CONSTRAINT developer_license_pkey PRIMARY KEY (developer_id, license_id);
+
+
+--
+-- TOC entry 2877 (class 2606 OID 16433)
+-- Name: developers developers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developers
+    ADD CONSTRAINT developers_pkey PRIMARY KEY (developer_id);
+
+
+--
+-- TOC entry 2881 (class 2606 OID 16449)
+-- Name: licenses licenses_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.licenses
+    ADD CONSTRAINT licenses_pkey PRIMARY KEY (license_id);
+
+
+--
+-- TOC entry 2875 (class 2606 OID 16425)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
+
+
+--
+-- TOC entry 2887 (class 2606 OID 16463)
+-- Name: developer_asset developer_asset_asset_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developer_asset
+    ADD CONSTRAINT developer_asset_asset_id_fkey FOREIGN KEY (asset_id) REFERENCES public.assets(asset_id);
+
+
+--
+-- TOC entry 2886 (class 2606 OID 16458)
+-- Name: developer_asset developer_asset_developer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developer_asset
+    ADD CONSTRAINT developer_asset_developer_id_fkey FOREIGN KEY (developer_id) REFERENCES public.developers(developer_id);
+
+
+--
+-- TOC entry 2888 (class 2606 OID 16476)
+-- Name: developer_license developer_license_developer_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developer_license
+    ADD CONSTRAINT developer_license_developer_id_fkey FOREIGN KEY (developer_id) REFERENCES public.developers(developer_id);
+
+
+--
+-- TOC entry 2889 (class 2606 OID 16481)
+-- Name: developer_license developer_license_license_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.developer_license
+    ADD CONSTRAINT developer_license_license_id_fkey FOREIGN KEY (license_id) REFERENCES public.licenses(license_id);
+
+
+-- Completed on 2021-08-01 23:37:36
+
+--
+-- PostgreSQL database dump complete
+--
+
