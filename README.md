@@ -8,7 +8,6 @@ This repository contains the Python backend for the asset/license management app
 
 Things you need to install:
 
-- [Node.js](https://nodejs.org/es/)
 - [Python3](https://www.python.org/downloads/)
 - [PostgreSQL](https://www.postgresql.org/download/)
 - pip3 installed, as well as the following packages:
